@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React!</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Load Google Ad Manager -->
+    <script type="text/javascript">
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+        (function() {
+            var gads = document.createElement("script");
+            gads.async = true;
+            gads.type = "text/javascript";
+            var useSSL = "https:" == document.location.protocol;
+            gads.src = (useSSL ? "https:" : "http:") + "//www.googletagservices.com/tag/js/gpt.js";
+            var node =document.getElementsByTagName("script")[0];
+            node.parentNode.insertBefore(gads, node);
+            })();
+        </script>
+</head>
+<body>
+    <div class="container">
+        <div id="example"></div>
+        <div class="blank-div"></div>
+        <div class="gamwrapper-ad" id="leaderboard"></div>
+        <div id="log"></div>
+    </div>
+
+    <!-- Dependencies -->
+    <script src="./node_modules/react/umd/react.development.js"></script>
+    <script src="./node_modules/react-dom/umd/react-dom.development.js"></script>
+
+    <!-- Main -->
+    <script src="./dist/bundle.js"></script>
+</body>
+</html>
+
