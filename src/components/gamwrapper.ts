@@ -16,6 +16,7 @@ class gamWrapper {
             rootMargin: '0px',
             threshold: 1
         };
+
         gamWrapper.ads = document.querySelectorAll( '.gamwrapper-ad' );
 
         window.addEventListener( 'load', function(event) {
@@ -44,9 +45,6 @@ class gamWrapper {
         gpt.cmd.push( () => {
 
             let ad: any = {};
-            let _self = this;
-
-            console.log( gamWrapper.ads );
 
             gamWrapper.ads.forEach( ( ad: any ) => {
                 let slot = gpt.defineSlot(
@@ -59,6 +57,8 @@ class gamWrapper {
 
                 gamWrapper.adSlots[ ad.id ] = slot;
                 gamWrapper.adSlots[ ad.id ].isLoaded = false;
+                gamWrapper.adSlots[ ad.id ].canRefresh = false;
+                gamWrapper.adSlots[ ad.id ].screenTime = 0;
 
                 this.bindEvent( gamWrapper.adSlots[ ad.id ] );
 
@@ -98,6 +98,7 @@ class gamWrapper {
         gpt.pubads().addEventListener( 'impressionViewable', ( event: any ) => {
             if ( event.slot == slot ) {
                 console.log( 'Slot Impresssion Viewable' );
+                slot.canRefresh = true;
             }
         } );
     }
