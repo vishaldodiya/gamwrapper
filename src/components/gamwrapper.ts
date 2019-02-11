@@ -14,7 +14,7 @@ class gamWrapper {
         this.options = {
             root: null,
             rootMargin: '0px',
-            threshold: 1
+            threshold: 0.75
         };
 
         gamWrapper.ads = document.querySelectorAll( '.gamwrapper-ad' );
@@ -34,9 +34,12 @@ class gamWrapper {
     public handleIntersect( entries: Array<object>, observer: object ) {
 
         entries.forEach( function( entry: any ) {
-            if ( 1 === entry.intersectionRatio ) {
+            if ( 0.75 < entry.intersectionRatio ) {
                 this.renderAd( entry.target.id );
-            } 
+                this.setTimer( entry.target.id );
+            } else {
+                this.resetTimer( entry.target.id );
+            }
         }, new gamWrapper() );
     }
 
@@ -59,6 +62,7 @@ class gamWrapper {
                 gamWrapper.adSlots[ ad.id ].isLoaded = false;
                 gamWrapper.adSlots[ ad.id ].canRefresh = false;
                 gamWrapper.adSlots[ ad.id ].screenTime = 0;
+                gamWrapper.adSlots[ ad.id ].timerId = 0;
 
                 this.bindEvent( gamWrapper.adSlots[ ad.id ] );
 
@@ -101,6 +105,40 @@ class gamWrapper {
                 slot.canRefresh = true;
             }
         } );
+    }
+
+    public refreshAd( slot: any ) {
+        gpt.cmd.push( () => {
+            if ( slot && true === slot.canRefresh ) {
+                gpt.pubads().refresh( slot );
+                slot.screenTime = 0;
+                console.log( 'Ad refreshed' );
+            }
+        } );
+    }
+
+    public setTimer( slotId: string ) {
+
+        if ( gamWrapper.adSlots[ slotId ] && 0 === gamWrapper.adSlots[ slotId ].timerId ) {
+
+            gamWrapper.adSlots[ slotId ].timerId = setInterval( () => {
+                gamWrapper.adSlots[ slotId ].screenTime += 1;
+                console.log( slotId + ' Screen Time: ' + gamWrapper.adSlots[ slotId ].screenTime );
+                if ( 30 < gamWrapper.adSlots[ slotId ].screenTime ) {
+                    console.log( slotId + ' Screen Time > 30s' );
+                    this.refreshAd( gamWrapper.adSlots[ slotId ] );
+                }
+            }, 1000 );
+            console.log( 'Timer set: ' + slotId );
+        }
+    }
+
+    public resetTimer( slotId: string ) {
+        if ( gamWrapper.adSlots[ slotId ] && 0 !== gamWrapper.adSlots[ slotId ].timerId ) {
+            clearInterval( gamWrapper.adSlots[ slotId ].timerId );
+            gamWrapper.adSlots[ slotId ].timerId = 0;
+            console.log( 'Timer Reset: ' + slotId );
+        }
     }
 }
 
