@@ -4,6 +4,7 @@
   "description": "Google Ad Manager Wrapper",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
     "watch": "webpack --watch"
   },
   "author": "Vishal Dodiya",
