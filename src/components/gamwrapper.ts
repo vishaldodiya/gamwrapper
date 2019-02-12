@@ -110,7 +110,7 @@ class gamWrapper {
     public refreshAd( slot: any ) {
         gpt.cmd.push( () => {
             if ( slot && true === slot.canRefresh ) {
-                gpt.pubads().refresh( slot );
+                gpt.pubads().refresh( [ slot ] );
                 slot.screenTime = 0;
                 console.log( 'Ad refreshed' );
             }
