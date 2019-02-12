@@ -77,8 +77,11 @@ class gamWrapper {
     }
 
     public renderAd( slotId: string ) {
+
+        let slot = this.getAdSlot( slotId );
+
         gpt.cmd.push( () => {
-            if ( gamWrapper.adSlots[ slotId ] && false === gamWrapper.adSlots[ slotId ].isLoaded ) {
+            if ( slot && false === slot.isLoaded ) {
                 gpt.display( slotId );
             }
         } );
@@ -119,14 +122,16 @@ class gamWrapper {
 
     public setTimer( slotId: string ) {
 
-        if ( gamWrapper.adSlots[ slotId ] && 0 === gamWrapper.adSlots[ slotId ].timerId ) {
+        let slot = this.getAdSlot( slotId );
 
-            gamWrapper.adSlots[ slotId ].timerId = setInterval( () => {
-                gamWrapper.adSlots[ slotId ].screenTime += 1;
-                console.log( slotId + ' Screen Time: ' + gamWrapper.adSlots[ slotId ].screenTime );
-                if ( 30 < gamWrapper.adSlots[ slotId ].screenTime ) {
+        if ( slot && 0 === slot.timerId ) {
+
+            slot.timerId = setInterval( () => {
+                slot.screenTime += 1;
+                console.log( slotId + ' Screen Time: ' + slot.screenTime );
+                if ( 30 < slot.screenTime ) {
                     console.log( slotId + ' Screen Time > 30s' );
-                    this.refreshAd( gamWrapper.adSlots[ slotId ] );
+                    this.refreshAd( slot );
                 }
             }, 1000 );
             console.log( 'Timer set: ' + slotId );
@@ -134,11 +139,18 @@ class gamWrapper {
     }
 
     public resetTimer( slotId: string ) {
-        if ( gamWrapper.adSlots[ slotId ] && 0 !== gamWrapper.adSlots[ slotId ].timerId ) {
-            clearInterval( gamWrapper.adSlots[ slotId ].timerId );
-            gamWrapper.adSlots[ slotId ].timerId = 0;
+
+        let slot = this.getAdSlot( slotId );
+
+        if ( slot && 0 !== slot.timerId ) {
+            clearInterval( slot.timerId );
+            slot.timerId = 0;
             console.log( 'Timer Reset: ' + slotId );
         }
+    }
+
+    public getAdSlot( slotId: string ) {
+        return ( slotId && gamWrapper.adSlots[ slotId ] ) ? gamWrapper.adSlots[ slotId ] : false;
     }
 }
 
