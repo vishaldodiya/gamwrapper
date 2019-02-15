@@ -44,7 +44,7 @@ class gamWrapper {
         window.addEventListener( 'load', function(event) {
             if ( (<any>window).googletag && (<any>window).googletag.apiReady ) {
                 _self.setGpt();
-                _self.setupAd();
+                _self.setupAd( (<any>window).adConfig || false );
             }
         } );
     }
@@ -77,21 +77,33 @@ class gamWrapper {
     /**
      * Does initial Setup of Ads. 
      */
-    public setupAd() {
+    public setupAd( adConfig: any ) {
+
+        if ( ! adConfig ) {
+            return;
+        }
 
         gpt.cmd.push( () => {
 
             let ad: any = {}; // @todo: If not needed remove it.
 
             gamWrapper.ads.forEach( ( ad: any ) => {
+
+                if ( ! adConfig[ ad.id ] ) {
+                    return;
+                }
                 // Create slot.
                 let slot = gpt.defineSlot(
-                    '/6355419/Travel/Europe/France/Paris',
-                    [
-                        [300, 250],
-                    ],
+                    adConfig[ ad.id ].path,
+                    adConfig[ ad.id ].size,
                     ad.id
                 ).addService( gpt.pubads() );
+
+                if ( adConfig[ ad.id ].targeting ) {
+                    for ( let key in adConfig[ ad.id ].targeting ) {
+                        slot.setTargeting( key, adConfig[ ad.id ].targeting[ key ] );
+                    }
+                }
 
                 // Assign custom object keys.
                 gamWrapper.adSlots[ ad.id ] = slot;
