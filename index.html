@@ -27,6 +27,7 @@
         <div id="example"></div>
         <div class="blank-div"></div>
         <div class="gamwrapper-ad" id="leaderboard"></div>
+        <div class="blank-div"></div>
         <div class="gamwrapper-ad" id="mid-article"></div>
         <div id="log"></div>
     </div>
@@ -34,21 +35,25 @@
     <script>
         var adConfig = {
             'leaderboard': {
-                'path': '/6355419/Travel/Europe/France/Paris',
+                'path': '/6355419/Travel',
                 'size': [
-                    [ 300, 250 ]
+                    [ 728, 90 ]
                 ],
                 'divId': 'leaderboard',
-                'targeting': {},
+                'targeting': {
+                    'test': 'refresh'
+                },
             },
             'mid-article': {
-                'path': '/6355419/Travel/Europe/France/Paris_1',
+                'path': '/6355419/Travel',
                 'size': [
                     [ 728, 90 ],
                     [ 300, 250 ]
                 ],
                 'divId': 'mid-article',
-                'targeting': {},
+                'targeting': {
+                    'test': 'refresh'
+                },
             },
         };
     </script>
