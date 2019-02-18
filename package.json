@@ -2,18 +2,26 @@
   "name": "gamwrapper",
   "version": "1.0.0",
   "description": "Google Ad Manager Wrapper",
-  "main": "index.js",
+  "main": "dist/index.bundle.js",
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch"
   },
   "author": "Vishal Dodiya",
-  "license": "ISC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vishaldodiya/gamwrapper/issues"
+  },
+  "homepage": "https://vishaldodiya.github.io/gamwrapper/",
   "dependencies": {
     "@types/react": "^16.8.2",
     "@types/react-dom": "^16.8.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vishaldodiya/gamwrapper.git"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.1",
