@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDom from "react-dom";
-import './components/gamwrapper';
+import './lib/gamwrapper';
 
 import { Hello } from "./components/hello"
 
