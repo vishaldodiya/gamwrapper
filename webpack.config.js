@@ -1,7 +1,7 @@
 module.exports = {
     entry: {
         index: "./src/lib/gamwrapper.ts",
-        example: "./src/index.tsx"
+        example: "./example/src/index.tsx"
     },
     output: {
         filename: "[name].bundle.js",

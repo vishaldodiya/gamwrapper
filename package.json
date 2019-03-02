@@ -13,12 +13,7 @@
     "url": "https://github.com/vishaldodiya/gamwrapper/issues"
   },
   "homepage": "https://vishaldodiya.github.io/gamwrapper/",
-  "dependencies": {
-    "@types/react": "^16.8.2",
-    "@types/react-dom": "^16.8.0",
-    "react": "^16.8.1",
-    "react-dom": "^16.8.1"
-  },
+  "dependencies": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/vishaldodiya/gamwrapper.git"
