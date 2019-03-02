@@ -3,6 +3,7 @@
   "version": "1.2.0",
   "description": "Google Ad Manager Wrapper",
   "main": "dist/index.bundle",
+  "typings": "dist/index.bundle",
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch"
