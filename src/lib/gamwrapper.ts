@@ -3,7 +3,7 @@ let gpt: any = {}; // Create global gpt variable, @todo: try adding it as static
 /**
  * Google Ad Manager Wrapper class. 
  */
-export default class gamWrapper {
+export class gamWrapper {
 
     /**
      * Contains all Ad slots.
