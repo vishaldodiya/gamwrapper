@@ -1,6 +1,6 @@
 {
   "name": "gamwrapper",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Google Ad Manager Wrapper",
   "main": "dist/gamwrapper.js",
   "types": "dist/gamwrapper.d.ts",
